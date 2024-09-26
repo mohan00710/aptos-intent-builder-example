@@ -17,3 +17,11 @@ The Aptos Intent Builder is currently under development and works only on the lo
 - Ensure you are running an Aptos node on your local machine.
 
 - Set your `PRIVATE_KEY` in the `.env` file 
+
+
+## Running Aptos node in local-net
+
+1 . Clone aptos core repository `https://github.com/aptos-labs/aptos-core.git`
+2 . Run `git checkout runtianz/intent_sdk`
+3 . Run `cargo build --package aptos --release`
+4 . Run `./target/release/aptos node run-local-testnet --with-faucet`

@@ -15,7 +15,7 @@ if(!process.env.PRIVATE_KEY) throw new Error("Missing private key in the env")
 
 const config = new AptosConfig({
   network: APTOS_NETWORK,
-  fullnode: "http://127.0.0.1:8080/v1",
+  fullnode: "https://fullnode.mainnet.aptoslabs.com/v1",
 });
 const aptos = new Aptos(config);
 
@@ -61,7 +61,7 @@ const transactionBuilder = async () => {
   });
 };
 
-// transactionBuilder();
+transactionBuilder();
 
 const withDrawAndTransfer = async () => {
   const account = await aptos.deriveAccountFromPrivateKey({
@@ -95,4 +95,4 @@ const withDrawAndTransfer = async () => {
   });
 };
 
-withDrawAndTransfer()
+// withDrawAndTransfer()

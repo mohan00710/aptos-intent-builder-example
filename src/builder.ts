@@ -4,9 +4,9 @@ import {
   Aptos,
   AptosConfig,
   Ed25519PrivateKey,
+  CallArgument,
 } from "@aptos-labs/ts-sdk";
 //@ts-ignore
-import { BatchArgument } from "@wgb5445/aptos-intent-npm";
 import "dotenv/config"
 
 const APTOS_NETWORK: Network = NetworkToNetworkName[Network.CUSTOM];
@@ -27,22 +27,23 @@ const transactionBuilder = async () => {
   const account = await aptos.deriveAccountFromPrivateKey({
     privateKey: privateKey,
   });
-  const transaction = await aptos.transaction.build.batched_intents({
+
+  const transaction = await aptos.transaction.build.scriptComposer({
     sender: account.accountAddress,
     builder: async (builder :any) => {
-      let return_1 = await builder.add_batched_calls({
+      let return_1 = await builder.addBatchedCalls({
         function: `0x1::coin::withdraw`,
-        functionArguments: [BatchArgument.new_signer(0), 1],
+        functionArguments: [CallArgument.new_signer(0), 1],
         typeArguments: ["0x1::aptos_coin::AptosCoin"],
       });
 
-      let return_2 = await builder.add_batched_calls({
+      let return_2 = await builder.addBatchedCalls({
         function: `0x1::coin::coin_to_fungible_asset`,
         functionArguments: [return_1[0]],
         typeArguments: ["0x1::aptos_coin::AptosCoin"],
       });
 
-      await builder.add_batched_calls({
+      await builder.addBatchedCalls({
         function: `0x1::primary_fungible_store::deposit`,
         functionArguments: [account.accountAddress, return_2[0]],
         typeArguments: [],
@@ -61,22 +62,22 @@ const transactionBuilder = async () => {
   });
 };
 
-transactionBuilder();
+// transactionBuilder();
 
 const withDrawAndTransfer = async () => {
   const account = await aptos.deriveAccountFromPrivateKey({
     privateKey: privateKey,
   });
 
-  const transaction = await aptos.transaction.build.batched_intents({
+  const transaction = await aptos.transaction.build.scriptComposer({
     sender: account.accountAddress,
     builder: async (builder:any) => {
-      let return_1 = await builder.add_batched_calls({
+      let return_1 = await builder.addBatchedCalls({
         function: `0x1::coin::withdraw`,
-        functionArguments: [BatchArgument.new_signer(0), 1],
+        functionArguments: [CallArgument.new_signer(0), 1],
         typeArguments: ["0x1::aptos_coin::AptosCoin"],
       });
-      await builder.add_batched_calls({
+      await builder.addBatchedCalls({
         function: `0x1::aptos_account::deposit_coins`,
         functionArguments: ["0xc28d2afe28b6bc998a9f90c27e1db650892e13631eec27db29e6d148fd9d52b7", return_1[0]],
         typeArguments: ["0x1::aptos_coin::AptosCoin"],
@@ -95,4 +96,4 @@ const withDrawAndTransfer = async () => {
   });
 };
 
-// withDrawAndTransfer()
+withDrawAndTransfer()

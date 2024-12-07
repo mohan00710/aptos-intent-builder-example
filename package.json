@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@aptos-labs/aptos-faucet-client": "^0.2.0",
-    "@aptos-labs/ts-sdk": "file:aptos-labs-ts-sdk-1.23.0.tgz",
+    "@aptos-labs/ts-sdk": "^1.33.0-sc.0",
     "@wgb5445/aptos-intent-npm": "^0.0.12",
     "axios": "^1.7.2",
     "esm": "^3.2.25",

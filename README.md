@@ -11,17 +11,7 @@ The Aptos Intent Builder is currently under development and works only on the lo
 5. Execute `ts-node src/builder.ts` to run the intent builder example.
 
 ## Important Notes
-
-- Navigate to `node_modules/@wgb5445/package.json` and change the `type` field to `"commonjs"` to avoid the `ERR_REQUIRE_ESM` error during the build or runtime. (Yes, this is a temporary hack for now.)
-
-- Ensure you are running an Aptos node on your local machine.
+- Make sure you install https://www.npmjs.com/package/@aptos-labs/ts-sdk/v/1.33.0-sc.1 as one of your dependencies
 
 - Set your `PRIVATE_KEY` in the `.env` file 
 
-
-## Running Aptos node in local-net
-
-1 . Clone aptos core repository `https://github.com/aptos-labs/aptos-core.git`
-2 . Run `git checkout runtianz/intent_sdk`
-3 . Run `cargo build --package aptos --release`
-4 . Run `./target/release/aptos node run-local-testnet --with-faucet`
